@@ -2,7 +2,7 @@ pipeline{
     agent any
 
     environment{
-        dockerfilePath = "/home/batoi/Documentos/Jenkins/practica-Jenkins"
+        dockerfilePath = "/home/batoi/Documentos/Jenkins-2"
         registry = "imartosgazquez/practica-jenkins:v1"
         registryCredential = 'DockerHUB'
     }
