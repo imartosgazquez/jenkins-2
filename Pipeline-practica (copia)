@@ -8,15 +8,18 @@ pipeline{
     }
 
     stages{
-        stage ('Test'){
-            steps {
-                sh 'echo executing test'
+        stage('Clonar Repositorio') {
+            steps{
+	            withCredentials([usernamePassword(credentialsId:'DockerHUB', usernameVariable:'CUSTOM_USER', passwordVariable:'CUSTOM_PASSWORD')]){
+	                script{
+	                    sh "git clone https://$CUSTOM_USER:CUSTOM_PASSWORD@github.com/imartosgazquez/jenkins-2.git"
+                    }
             }
         }
         stage('Build image Docker'){
             steps {
                 script{
-                    dockerImage = docker.build(registry, "-f $dockerfilePath/Dockerfile .")
+                    def dockerImage = docker.build('practica-jenkins:v1')
                 }
             }
         }
